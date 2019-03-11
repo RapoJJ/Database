@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using PersonExampleDB.Models;
+using System.Data.SqlClient;
 
 namespace PersonExampleDB.Repositories
 {
@@ -13,7 +14,13 @@ namespace PersonExampleDB.Repositories
 
         public void Create(Person person)
         {
-            throw new NotImplementedException();
+            string sql = $"INSERT INTO PERSON (FirstName, LastName, City, ShoeSize) " +
+                         $"VALUES ({person.FirstName}, {person.FirstName}, {person.LastName},{person.City},{person.ShoeSize})";
+
+
+            _persontestdbContext.Add(person);
+            _persontestdbContext.SaveChanges();
+
         }
 
         public List<Person> Read()
@@ -24,18 +31,28 @@ namespace PersonExampleDB.Repositories
 
         public List<Person> ReadByCity(string city)
         {
-            var persons = _persontestdbContext.Person.FromSql(
-                $"SELECT * FROM PERSON WHERE CITY = {city}").ToList();
+            //var persons = _persontestdbContext.Person.FromSql($"SELECT * FROM PERSON WHERE CITY = {city}").ToList();
 
             //var persons = _persontestdbContext.Person.Where(p => p.City == "Juuka").ToListAsync().Result;
+
+            var persons = _persontestdbContext.
+                Person.
+                Where(p => p.City == city).
+                ToListAsync().
+                Result;
 
             return persons;
         }
 
         public Person ReadById(long id)
         {
-            var person = _persontestdbContext.Person.FromSql(
-                $"SELECT * FROM PERSON WHERE Id = {id}").Single();
+            //var person = _persontestdbContext.Person.FromSql($"SELECT * FROM PERSON WHERE Id = {id}").Single();
+
+            //var person = _persontestdbContext.
+            //    Person.
+            //    FirstOrDefault(p => p.Id == id);
+
+            var person = _persontestdbContext.Person.Find(id);
 
             return person;
         }
