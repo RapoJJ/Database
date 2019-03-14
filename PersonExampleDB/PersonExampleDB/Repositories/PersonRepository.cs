@@ -35,11 +35,7 @@ namespace PersonExampleDB.Repositories
 
             //var persons = _persontestdbContext.Person.Where(p => p.City == "Juuka").ToListAsync().Result;
 
-            var persons = _persontestdbContext.
-                Person.
-                Where(p => p.City == city).
-                ToListAsync().
-                Result;
+            var persons = _persontestdbContext.Person.Where(p => p.City == city).ToListAsync().Result;
 
             return persons;
         }
@@ -59,12 +55,34 @@ namespace PersonExampleDB.Repositories
 
         public void Update(long id, Person person)
         {
-            throw new NotImplementedException();
+            var isPersonAlive = ReadById(id);
+
+            if (isPersonAlive != null)
+            {
+                _persontestdbContext.Update(person);
+                _persontestdbContext.SaveChanges();
+                Console.WriteLine("Tiedot päivitetty onnistuneesti!");
+            }
+            else
+            {
+                Console.WriteLine("Tietojen päivitys epäonnistui - henkilöä ei ole olemassa!");
+            }
         }
 
         public void Delete(long id)
         {
-            throw new NotImplementedException();
+            var deletedPerson = _persontestdbContext.Person.Find(id);
+
+            if (deletedPerson != null)
+            {
+                _persontestdbContext.Person.Remove(deletedPerson);
+                _persontestdbContext.SaveChanges();
+                Console.WriteLine("Tiedot poistettu onnistuneesti!");
+            }
+            else
+            {
+                Console.WriteLine("Henkilöä tällä id:llä ei löytynyt!");
+            }
         }
     }
 }

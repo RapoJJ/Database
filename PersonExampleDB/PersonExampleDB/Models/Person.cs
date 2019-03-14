@@ -20,7 +20,7 @@ namespace PersonExampleDB.Models
         public string Sex { get; set; }
         [StringLength(10)]
         public string EyeColor { get; set; }
-        public int? ShoeSize { get; set; }
+        public int? ShoeSize { get; set; } 
         public int? Height { get; set; }
     }
 }
