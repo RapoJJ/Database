@@ -1,4 +1,5 @@
 ﻿using System;
+using BankAppDB.Repositories;
 
 namespace BankAppDB
 {
@@ -6,7 +7,20 @@ namespace BankAppDB
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BankRepository bankRepository = new BankRepository();
+
+            var bankList = bankRepository.ReadAll();
+
+
+            foreach (var b in bankList)
+            {
+                Console.WriteLine($"{b.Name} {b.Bic} {b.ID}");
+            }
+
+
+            var bank = bankRepository.ReadById(1);
+
+            Console.WriteLine(bank.Name);
         }
     }
 }
