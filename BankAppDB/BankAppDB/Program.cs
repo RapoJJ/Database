@@ -1,4 +1,5 @@
 ﻿using System;
+using BankAppDB.Models;
 using BankAppDB.Repositories;
 
 namespace BankAppDB
@@ -9,7 +10,7 @@ namespace BankAppDB
         {
             BankRepository bankRepository = new BankRepository();
 
-            var bankList = bankRepository.ReadAll();
+            /*var bankList = bankRepository.ReadAll();
 
 
             foreach (var b in bankList)
@@ -20,7 +21,23 @@ namespace BankAppDB
 
             var bank = bankRepository.ReadById(1);
 
-            Console.WriteLine(bank.Name);
+            Console.WriteLine(bank.Name);*/
+
+
+            Bank newBank = new Bank
+            {
+                Name = "Nordea",
+                Bic = "NDEAFIHH"
+            };
+            //bankRepository.Create(newBank);
+
+            Bank updateBank = bankRepository.ReadById(3);
+
+            updateBank.Bic = "NDEAFIHH";
+
+            bankRepository.Update(3,updateBank);
+
+            bankRepository.Delete(5);
         }
     }
 }
