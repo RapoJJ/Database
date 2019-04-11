@@ -7,18 +7,17 @@ namespace BankAppDB.Models
 {
     public partial class Transaction
     {
-        public long ID { get; set; }
+        public long Id { get; set; }
         [Required]
-        [Column("IBAN")]
         [StringLength(20)]
-        public string Iban { get; set; }
+        public string IBAN { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Amount { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime TimeStamp { get; set; }
 
-        [ForeignKey("Iban")]
+        [ForeignKey("IBAN")]
         [InverseProperty("Transaction")]
-        public virtual Account IbanNavigation { get; set; }
+        public virtual Account IBANNavigation { get; set; }
     }
 }

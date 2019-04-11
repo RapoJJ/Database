@@ -29,9 +29,10 @@ namespace BankAppDB.Repositories
             var customer = _bankdbContext.Customer
                 .Include(c => c.Account)
                 .ThenInclude(c => c.Transaction)
-                .FirstOrDefault(c => c.ID == id);
+                .FirstOrDefault(c => c.Id == id);
             return customer;
         }
+
 
         public void Update(long id, Customer customer)
         {

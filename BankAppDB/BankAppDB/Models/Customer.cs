@@ -12,14 +12,14 @@ namespace BankAppDB.Models
             Account = new HashSet<Account>();
         }
 
-        public long ID { get; set; }
+        public long Id { get; set; }
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
         [Required]
         [StringLength(50)]
         public string LastName { get; set; }
-        public long BankID { get; set; }
+        public long BankId { get; set; }
 
         [ForeignKey("BankId")]
         [InverseProperty("Customer")]

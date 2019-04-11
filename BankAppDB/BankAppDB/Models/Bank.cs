@@ -13,14 +13,13 @@ namespace BankAppDB.Models
             Customer = new HashSet<Customer>();
         }
 
-        public long ID { get; set; }
+        public long Id { get; set; }
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
         [Required]
-        [Column("BIC")]
         [StringLength(10)]
-        public string Bic { get; set; }
+        public string BIC { get; set; }
 
         [InverseProperty("Bank")]
         public virtual ICollection<Account> Account { get; set; }

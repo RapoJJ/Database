@@ -29,7 +29,7 @@ namespace BankAppDB.Repositories
             var bank = _bankdbContext.Bank
                 .Include(b => b.Customer)
                 .ThenInclude(b => b.Account)
-                .FirstOrDefault(b => b.ID == id);
+                .FirstOrDefault(b => b.Id == id);
             return bank;
         }
 

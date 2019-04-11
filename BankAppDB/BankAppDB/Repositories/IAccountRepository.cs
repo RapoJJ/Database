@@ -8,8 +8,8 @@ namespace BankAppDB.Repositories
         //CRUD
         void Create(Account account);
         List<Account> ReadAll();
-        Account ReadById(long id);
-        void Update(long id, Account account);
-        void Delete(long id);
+        Account ReadById(string id);
+        void Update(string id, Account account);
+        void Delete(string id);
     }
 }

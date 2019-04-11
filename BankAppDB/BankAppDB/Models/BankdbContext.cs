@@ -35,19 +35,19 @@ namespace BankAppDB.Models
 
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.Property(e => e.Iban).ValueGeneratedNever();
+                entity.Property(e => e.IBAN).ValueGeneratedNever();
 
                 entity.Property(e => e.Name).IsUnicode(false);
 
                 entity.HasOne(d => d.Bank)
                     .WithMany(p => p.Account)
-                    .HasForeignKey(d => d.BankID)
+                    .HasForeignKey(d => d.BankId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Account_Bank");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Account)
-                    .HasForeignKey(d => d.CustomerID)
+                    .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK_Account_Customer");
             });
 
@@ -64,7 +64,7 @@ namespace BankAppDB.Models
 
                 entity.HasOne(d => d.Bank)
                     .WithMany(p => p.Customer)
-                    .HasForeignKey(d => d.BankID)
+                    .HasForeignKey(d => d.BankId)
                     .HasConstraintName("FK_Customer_Bank");
             });
 
@@ -72,9 +72,9 @@ namespace BankAppDB.Models
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.IbanNavigation)
+                entity.HasOne(d => d.IBANNavigation)
                     .WithMany(p => p.Transaction)
-                    .HasForeignKey(d => d.Iban)
+                    .HasForeignKey(d => d.IBAN)
                     .HasConstraintName("FK_Transaction_Account");
             });
 
